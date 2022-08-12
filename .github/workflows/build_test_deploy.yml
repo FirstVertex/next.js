@@ -1476,9 +1476,9 @@ jobs:
           usesh: true
           mem: 6000
           prepare: |
-            pkg install -y curl node14
+            pkg install -y curl node16
             curl -qL https://www.npmjs.com/install.sh | sh
-            npm install -g yarn
+            npm install --location=global --ignore-scripts yarn
             curl https://sh.rustup.rs -sSf --output rustup.sh
             sh rustup.sh -y --profile minimal --default-toolchain stable
             export PATH="/usr/local/cargo/bin:$PATH"
@@ -1495,8 +1495,8 @@ jobs:
             freebsd-version
             npm i -g "@napi-rs/cli@${NAPI_CLI_VERSION}"
             cd packages/next-swc && napi build --platform -p next-swc-napi --cargo-name next_swc_napi native --release --target x86_64-unknown-freebsd
-            rm -rf node_modules
-            rm -rf packages/next-swc/target
+            rm -rf ../../node_modules
+            rm -rf target
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
